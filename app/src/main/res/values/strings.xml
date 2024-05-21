@@ -1,0 +1,11 @@
+<resources>
+    <string name="appName">Track N Jeep</string>
+    <string name="btnTxtLoginUser">Sign Up</string>
+    <string name="btnTxtLoginGuest">Continue as Guest</string>
+    <string name="txtLogInWith">Log in with </string>
+    <string name="loginText">LOGIN</string>
+    <string name="emailDefault">Email</string>
+    <string name="passwordDefault">Password</string>
+    <string name="registerText">Register</string>
+
+</resources>

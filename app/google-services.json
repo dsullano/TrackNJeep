@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "419857146840",
+    "project_id": "tracknjeep-f4109",
+    "storage_bucket": "tracknjeep-f4109.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419857146840:android:f1067a439c0cdf3ceb88ad",
+        "android_client_info": {
+          "package_name": "com.example.tracknjeep_test"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX29YvgsADNQku75u6gPj9z3t7K89DrqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
