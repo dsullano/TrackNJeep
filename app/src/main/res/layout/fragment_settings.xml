@@ -6,14 +6,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Settings">
 
-<<<<<<< HEAD
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Settings Fragment"
         android:textSize="25dp" />
-=======
+
     <LinearLayout
         android:id="@+id/llMain"
         android:layout_width="409dp"
@@ -111,6 +111,6 @@
             android:orientation="horizontal"></LinearLayout>
 
     </LinearLayout>
->>>>>>> 37a339a3bfc569f308a10e4adaef4c233ff0b5bd
+
 
 </RelativeLayout>

@@ -31,11 +31,9 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
-
         footer = findViewById(R.id.footer);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container,home).commit();
-
 
         footer.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
