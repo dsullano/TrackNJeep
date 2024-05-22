@@ -2,10 +2,12 @@ package com.example.tracknjeep_test;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,11 +16,20 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.tracknjeep_test.auth.Login;
 import com.example.tracknjeep_test.auth.Register;
 import com.example.tracknjeep_test.R;
+import com.example.tracknjeep_test.fragments.Add;
+import com.example.tracknjeep_test.fragments.Home;
+import com.example.tracknjeep_test.fragments.Maps;
+import com.example.tracknjeep_test.fragments.Notifications;
+import com.example.tracknjeep_test.fragments.Settings;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button signUp;
     private Button test;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+
 
         signUp = (Button) findViewById(R.id.btnUser);
         signUp.setOnClickListener(new View.OnClickListener() {
