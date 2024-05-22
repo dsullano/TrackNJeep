@@ -10,4 +10,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!-- Setting Screen -->
+    <string name="txtSettings">Settings</string>
+    <string name="btnBack">Back Button</string>
 </resources>
