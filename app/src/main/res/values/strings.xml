@@ -8,4 +8,7 @@
     <string name="passwordDefault">Password</string>
     <string name="registerText">Register</string>
 
+    <!-- Setting Screen -->
+    <string name="txtSettings">Settings</string>
+    <string name="btnBack">Back Button</string>
 </resources>

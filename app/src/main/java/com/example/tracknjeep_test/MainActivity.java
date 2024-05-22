@@ -18,7 +18,6 @@ import com.example.tracknjeep_test.R;
 public class MainActivity extends AppCompatActivity {
 
     private Button signUp;
-
     private Button test;
 
     @Override
