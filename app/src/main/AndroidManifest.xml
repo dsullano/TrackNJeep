@@ -34,8 +34,8 @@
             android:value="AIzaSyDDzj6tlqEkIG3sKfBB9mJ_2FHYin26vzE" />
 
         <activity
-            android:name=".fragments.Maps$MapsActivity"
-            android:exported="false"/>
+            android:name=".fragments.Maps"
+            android:exported="false" />
         <activity
             android:name=".Favorites"
             android:exported="false" />

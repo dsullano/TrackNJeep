@@ -1,12 +1,13 @@
 package com.example.tracknjeep_test.fragments;
 
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.tracknjeep_test.R;
@@ -17,22 +18,57 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.io.IOException;
+import java.util.List;
+
 public class Maps extends Fragment implements OnMapReadyCallback {
 
     private GoogleMap mMap;
 
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    private androidx.appcompat.widget.SearchView searchLocation;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater,ViewGroup container,  Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        searchLocation = view.findViewById(R.id.search_location);
+
+        searchLocation.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                String location = searchLocation.getQuery().toString();
+                List<Address> addressList = null;
+
+                if(location != null){
+                    Geocoder geocoder = new Geocoder(requireActivity());
+
+                    try{
+                        addressList = geocoder.getFromLocationName(location,1);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+                Address address = addressList.get(0);
+
+                LatLng latlng = new LatLng(address.getLatitude(),address.getLongitude());
+                mMap.addMarker(new MarkerOptions().position(latlng).title("TADA"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
-                .findFragmentById(R.id.map_container);
+                .findFragmentById(R.id.map);
         if (mapFragment == null) {
             mapFragment = SupportMapFragment.newInstance();
             getChildFragmentManager().beginTransaction()
-                    .replace(R.id.map_container, mapFragment)
+                    .replace(R.id.map, mapFragment)
                     .commit();
         }
         mapFragment.getMapAsync(this);
