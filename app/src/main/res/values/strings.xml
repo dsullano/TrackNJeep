@@ -20,4 +20,9 @@
     <string name="destination">Destination:</string>
     <string name="enter_from_location">Enter from location</string>
     <string name="from">From:</string>
+    <string name="transit_details_will_be_shown_here">Transit Details will be shown here</string>
+    <string name="available_jeepneys">Available Jeepneys:</string>
+    <string name="estimated_time_of_arrival">Estimated Time of Arrival:</string>
+    <string name="estimated_code">Estimated Code:</string>
+    <string name="fare_cost_discounted">Fare Cost (Discounted):</string>
 </resources>

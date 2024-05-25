@@ -1,16 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.Directions">
 
-    <!-- WebView for displaying Google Maps directions -->
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/map_fragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
+    <!-- FrameLayout for displaying Google Maps directions -->
+    <FrameLayout
+        android:id="@+id/map_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/map_fragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <!-- FrameLayout for displaying transit details -->
+    <FrameLayout
+        android:id="@+id/transit_details_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/transit_details_top"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@string/transit_details_will_be_shown_here"
+                android:textSize="18sp" />
 
 
-</FrameLayout>
+            <TextView
+                android:id="@+id/transit_available"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/available_jeepneys"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/transit_duration"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/estimated_time_of_arrival"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/transit_cost_normal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/estimated_code"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:padding="16dp" />
+
+            <TextView
+                android:id="@+id/transit_cost_discount"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/fare_cost_discounted"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:padding="16dp" />
+
+            <!-- You can include a layout file or add views dynamically in your Fragment -->
+        <!-- Example TextView to display transit details -->
+
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
