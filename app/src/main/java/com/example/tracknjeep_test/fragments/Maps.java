@@ -40,23 +40,27 @@ public class Maps extends Fragment implements OnMapReadyCallback {
                 String location = searchLocation.getQuery().toString();
                 List<Address> addressList = null;
 
-                if(location != null){
+                if (location != null) {
                     Geocoder geocoder = new Geocoder(requireActivity());
 
-                    try{
-                        addressList = geocoder.getFromLocationName(location,1);
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
                 }
-                Address address = addressList.get(0);
 
-                LatLng latlng = new LatLng(address.getLatitude(),address.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(latlng).title("TADA"));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
+                if (addressList != null && !addressList.isEmpty()) {
+                    Address address = addressList.get(0);
+
+                    LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latlng).title("TADA"));
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15));
+                }
 
                 return true;
             }
+
 
             @Override
             public boolean onQueryTextChange(String s) {
@@ -76,6 +80,7 @@ public class Maps extends Fragment implements OnMapReadyCallback {
         return view;
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -84,5 +89,14 @@ public class Maps extends Fragment implements OnMapReadyCallback {
         LatLng citu = new LatLng(10.29441995166696, 123.8811194524);
         mMap.addMarker(new MarkerOptions().position(citu).title("CIT-U"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(citu, 15));
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                mMap.clear();
+                mMap.addMarker(new MarkerOptions().position(latLng).title("NANA ka diri"));
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+            }
+        });
     }
 }
