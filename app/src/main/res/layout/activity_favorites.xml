@@ -50,7 +50,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView5"
+                    android:id="@+id/imageView53"
                     android:layout_width="59dp"
                     android:layout_height="34dp"
                     android:layout_weight="1"
@@ -117,7 +117,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/imageView52"
                         android:layout_width="59dp"
                         android:layout_height="34dp"
                         android:layout_weight="1"
@@ -133,14 +133,14 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView4"
+                        android:id="@+id/textView42"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Food Court"
                         android:textColor="#403C3C" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/textView51"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Sugbo Mercado, I.T. Park"
@@ -148,7 +148,7 @@
                         android:textSize="18sp" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/textView61"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Abad St, Apas, Cebu City"
@@ -161,7 +161,7 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/imageView41"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
                         app:srcCompat="@drawable/baseline_star_24" />

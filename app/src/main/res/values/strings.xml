@@ -14,4 +14,5 @@
     <string name="txtSettings">Settings</string>
     <string name="btnBack">Back Button</string>
     <string name="txtNotif">Notifications</string>
+    <string name="title_activity_maps">MapsActivity</string>
 </resources>
