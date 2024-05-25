@@ -14,8 +14,9 @@
         android:clickable="true"/>
 
     <FrameLayout
-        android:id="@+id/map"
+        android:id="@+id/map_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/search_location"/>
+
 </RelativeLayout>
