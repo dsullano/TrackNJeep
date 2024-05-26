@@ -29,7 +29,10 @@ import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.TravelMode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Directions extends Fragment implements OnMapReadyCallback {
 
@@ -143,13 +146,12 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                         PolylineOptions opts = new PolylineOptions().addAll(path).color(getResources().getColor(R.color.teal_700)).width(5);
                         mMap.addPolyline(opts);
 
-                        // Build transit details string
+                        // Collect all unique jeepney routes
+                        Set<String> jeepneyRoutes = new HashSet<>();
                         StringBuilder transitDetails = new StringBuilder();
                         for (com.google.maps.model.DirectionsLeg leg : route.legs) {
                             for (com.google.maps.model.DirectionsStep step : leg.steps) {
                                 if (step.transitDetails != null) {
-                                    // Log transit details
-
                                     // Add marker for the transit stop
                                     LatLng transitStop = new LatLng(
                                             step.transitDetails.departureStop.location.lat,
@@ -172,19 +174,40 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                                             .snippet(step.transitDetails.line.agencies[0].name)
                                     );
 
-
+                                    // Collect jeepney route names
+                                    if (step.transitDetails.line.shortName != null) {
+                                        jeepneyRoutes.add(step.transitDetails.line.shortName);
+                                    }
                                 }
                             }
                         }
 
+                        // Display all unique jeepney routes
+                        List<JeepneyRoute> jeepneyRoutesList = getJeepneyRoutes();
+                        for (JeepneyRoute jeepneyRoute : jeepneyRoutesList) {
+                            for (LatLng coord : jeepneyRoute.getRoute()) {
+                                if (path.contains(coord)) {
+                                    jeepneyRoutes.add(jeepneyRoute.getName());
+                                    break;
+                                }
+                            }
+                        }
+
+                        for (String routeName : jeepneyRoutes) {
+                            transitDetails.append(routeName).append("\n");
+                        }
                         transitDetailsText.setText(transitDetails.toString());
 
-                        String distanceDurationText = String.format("Distance: %.2f km\n\n\nEstimated Travel Time: %d hours %d minutes", distanceInKm, hours, minutes);
+                        String distanceDurationText = String.format("Distance: %.2f km\n\nEstimated Travel Time: %d hours %d minutes", distanceInKm, hours, minutes);
                         transitETA.setText(distanceDurationText);
+
                         double cost = ((distanceInKm - 4) * 2.1) + 13;
+                        if (cost < 13) {
+                            cost = 13;
+                        }
                         double discount = cost * .80;
                         String costText = String.format("Cost: %.2f", cost);
-                        String discountText = String.format("Discounted Price: %.2f\n", discount);
+                        String discountText = String.format("Discounted Price: %.2f", discount);
                         transitCost.setText(costText);
                         transitDiscount.setText(discountText);
                     });
@@ -193,5 +216,42 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                 e.printStackTrace();
             }
         }).start();
+    }
+
+    private List<JeepneyRoute> getJeepneyRoutes() {
+        List<JeepneyRoute> jeepneyRoutes = new ArrayList<>();
+
+        // Sample data for jeepney routes
+        List<LatLng> route1Coordinates = new ArrayList<>();
+        route1Coordinates.add(new LatLng(14.5995, 120.9842));
+        route1Coordinates.add(new LatLng(14.6000, 120.9850));
+        route1Coordinates.add(new LatLng(14.6010, 120.9860));
+        jeepneyRoutes.add(new JeepneyRoute("Route 1", route1Coordinates));
+
+        List<LatLng> route2Coordinates = new ArrayList<>();
+        route2Coordinates.add(new LatLng(14.5990, 120.9830));
+        route2Coordinates.add(new LatLng(14.5995, 120.9845));
+        route2Coordinates.add(new LatLng(14.6005, 120.9855));
+        jeepneyRoutes.add(new JeepneyRoute("Route 2", route2Coordinates));
+
+        return jeepneyRoutes;
+    }
+
+    private static class JeepneyRoute {
+        private String name;
+        private List<LatLng> route;
+
+        public JeepneyRoute(String name, List<LatLng> route) {
+            this.name = name;
+            this.route = route;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public List<LatLng> getRoute() {
+            return route;
+        }
     }
 }
