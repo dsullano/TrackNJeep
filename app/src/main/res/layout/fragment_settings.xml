@@ -7,13 +7,6 @@
     tools:context=".fragments.Settings">
 
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Settings Fragment"
-        android:textSize="25dp" />
-
     <LinearLayout
         android:id="@+id/llMain"
         android:layout_width="409dp"
@@ -74,29 +67,101 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/textView"
+                    android:id="@+id/llDarkMode"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/border_drawable"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/tvDarkMode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
-                        android:text="@string/txtNotif" />
+                        android:text="@string/txtDarkMode" />
 
                     <Switch
-                        android:id="@+id/switchNotif"
+                        android:id="@+id/switchDarkMode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center|center_horizontal|center_vertical" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAbout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border_drawable"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tvAbout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="@string/txtAbout" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPrivacyPolicy"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/border_drawable"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tvPrivacyPolicy"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="@string/txtPrivacyPolicy" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llLogOut"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingBottom="13dp"
+                    android:paddingTop="13dp"
+                    android:background="@drawable/border_drawable_red"
+                    android:orientation="horizontal"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tvLogOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="6"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="15dp"
+                        android:text="@string/txtLogOut"
+                        android:textColor="@android:color/holo_red_light"/>
 
                 </LinearLayout>
 
