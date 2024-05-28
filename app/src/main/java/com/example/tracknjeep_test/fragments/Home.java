@@ -64,7 +64,7 @@ public class Home extends Fragment {
     private void getDirections(String from, String to) {
         Directions directionsFragment = new Directions(from, to);
         getParentFragmentManager().beginTransaction()
-                .replace(R.id.frame_layout_container, directionsFragment)
+                .replace(R.id.frame_layout_top, directionsFragment)
                 .addToBackStack(null)
                 .commit();
     }

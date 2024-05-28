@@ -47,8 +47,11 @@ public class MainActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Login loginDialog = new Login();
-                loginDialog.show(getSupportFragmentManager(), "LoginBottomSheetDialog");
+//                Login loginDialog = new Login();
+//                loginDialog.show(getSupportFragmentManager(), "LoginBottomSheetDialog");
+                  Intent intent = new Intent(MainActivity.this,
+                          HomePage.class);
+                  startActivity(intent);
             }
         });
     }
