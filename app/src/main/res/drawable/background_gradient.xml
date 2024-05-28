@@ -3,12 +3,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item>
         <shape android:shape="rectangle">
-            <gradient
-                android:type="linear"
-                android:startColor="#F4743B"
-                android:centerColor="#C1D253"
-                android:endColor="#FFBD33"
-                android:angle="45"/>
+            <solid android:color="@color/btnOrange"/>
             <corners android:radius="24dp"></corners>
         </shape>
     </item>

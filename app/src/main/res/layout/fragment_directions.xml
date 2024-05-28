@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".fragments.Directions">
 
-    <!-- FrameLayout for displaying Google Maps directions -->
     <FrameLayout
         android:id="@+id/map_container"
         android:layout_width="match_parent"
@@ -21,7 +20,6 @@
 
     </FrameLayout>
 
-    <!-- FrameLayout for displaying transit details -->
     <FrameLayout
         android:id="@+id/transit_details_container"
         android:layout_width="match_parent"
@@ -30,49 +28,52 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="@drawable/rounded_colors_backgrounz"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/transit_details_top"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="16dp"
-                android:text="@string/transit_details_will_be_shown_here"
-                android:textSize="18sp" />
-
-
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/transit_duration"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/estimated_time_of_arrival"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:text="@string/estimated_time_of_arrival"
                 android:textSize="18sp"
-                android:padding="16dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/transit_cost_normal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/estimated_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:text="@string/estimated_code"
                 android:textSize="18sp"
-                android:padding="16dp" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/transit_cost_discount"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/fare_cost_discounted"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
+                android:paddingBottom="5dp"
+                android:textColor="@color/white"
+                android:text="@string/fare_cost_discounted"
                 android:textSize="18sp"
-                android:padding="16dp" />
-
-            <!-- You can include a layout file or add views dynamically in your Fragment -->
-        <!-- Example TextView to display transit details -->
+                android:textStyle="bold" />
 
 
         </LinearLayout>
