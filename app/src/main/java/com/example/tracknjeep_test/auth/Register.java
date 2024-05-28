@@ -1,18 +1,21 @@
 package com.example.tracknjeep_test.auth;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import com.example.tracknjeep_test.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,34 +25,34 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Register extends AppCompatActivity {
+public class Register extends BottomSheetDialogFragment {
 
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
-    private TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName, editTextGender, editTextBirthdate;
+    private TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName, editTextGender;
     private Button btnRegister;
     private ProgressBar progBar;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_register, container, false);
 
         mAuth = FirebaseAuth.getInstance();
         database = FirebaseDatabase.getInstance("https://tracknjeep-f4109-default-rtdb.asia-southeast1.firebasedatabase.app");
 
-        editTextEmail = findViewById(R.id.emailText);
-        editTextPassword = findViewById(R.id.passwordText);
-        editTextFirstName = findViewById(R.id.firstNameText);
-        editTextLastName = findViewById(R.id.lastNameText);
-        editTextGender = findViewById(R.id.genderText);
-        editTextBirthdate = findViewById(R.id.birthdateText);
-        progBar = findViewById(R.id.registerProgBar);
-        btnRegister = findViewById(R.id.registerBtn);
+        editTextEmail = view.findViewById(R.id.emailText);
+        editTextPassword = view.findViewById(R.id.passwordText);
+        editTextFirstName = view.findViewById(R.id.firstNameText);
+        editTextLastName = view.findViewById(R.id.lastNameText);
+        editTextGender = view.findViewById(R.id.genderText);
+        progBar = view.findViewById(R.id.registerProgBar);
+        btnRegister = view.findViewById(R.id.registerBtn);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,8 @@ public class Register extends AppCompatActivity {
         });
 
         initializeJeepneyRoutes(); // Initialize jeepney routes on app start
+
+        return view;
     }
 
     private void registerUser() {
@@ -68,11 +73,10 @@ public class Register extends AppCompatActivity {
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
         String gender = editTextGender.getText().toString().trim();
-        String birthdate = editTextBirthdate.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(firstName) ||
-                TextUtils.isEmpty(lastName) || TextUtils.isEmpty(gender) || TextUtils.isEmpty(birthdate)) {
-            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                TextUtils.isEmpty(lastName) || TextUtils.isEmpty(gender)) {
+            Toast.makeText(getActivity(), "Please fill in all fields", Toast.LENGTH_SHORT).show();
             progBar.setVisibility(View.GONE);
             return;
         }
@@ -86,7 +90,7 @@ public class Register extends AppCompatActivity {
                             FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
                             if (firebaseUser != null) {
-                                ReadWriteUserDetails userDetails = new ReadWriteUserDetails(firstName, lastName, birthdate, gender, email);
+                                ReadWriteUserDetails userDetails = new ReadWriteUserDetails(firstName, lastName, gender, email);
                                 DatabaseReference usersRef = database.getReference("users");
 
                                 usersRef.child(firebaseUser.getUid()).setValue(userDetails)
@@ -94,18 +98,20 @@ public class Register extends AppCompatActivity {
                                             @Override
                                             public void onComplete(@NonNull Task<Void> task) {
                                                 if (task.isSuccessful()) {
-                                                    Toast.makeText(Register.this, "Account Created Successfully", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(Register.this, Login.class);
-                                                    startActivity(intent);
-                                                    finish();
+                                                    Toast.makeText(getActivity(), "Account Created Successfully", Toast.LENGTH_SHORT).show();
+                                                    // Launch login dialog
+                                                    Login login = new Login();
+                                                    FragmentManager fragmentManager = getParentFragmentManager();
+                                                    login.show(fragmentManager, Login.class.getSimpleName());
+                                                    dismiss();
                                                 } else {
                                                     Log.e("Register", "Error adding user data to Realtime Database", task.getException());
-                                                    Toast.makeText(Register.this, "Failed to create account.", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(getActivity(), "Failed to create account.", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
                             } else {
-                                Toast.makeText(Register.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
@@ -160,8 +166,6 @@ public class Register extends AppCompatActivity {
         jeepneyRoutes.put("63X", new Jeepney("63X", "INAYAWAN - IT PARK", "INAYAWAN - BULACAO - PARDO - COLON - IT PARK"));
         jeepneyRoutes.put("64Y", new Jeepney("64Y", "LAHUG - CARBON", "LAHUG - GORORDO - GEN MAXILOM - FUENTE - JONES - COLON - CARBON"));
         jeepneyRoutes.put("65Z", new Jeepney("65Z", "TALAMBAN - AYALA", "TALAMBAN - BANILAD - ASILO - GORORDO - AYALA"));
-
-        // Additional routes
         jeepneyRoutes.put("12I", new Jeepney("12I", "LAHUG - COLON", "LAHUG - GORORDO - GEN MAXILOM - FUENTE - JONES - COLON"));
         jeepneyRoutes.put("13C", new Jeepney("13C", "TALAMBAN - COLON", "TALAMBAN - BANILAD - ASILO - GORORDO - FUENTE - COLON"));
         jeepneyRoutes.put("14D", new Jeepney("14D", "BULACAO - CEBU CITY HALL", "BULACAO - PARDO - BASAK - TABUNOK - CEBU CITY HALL"));

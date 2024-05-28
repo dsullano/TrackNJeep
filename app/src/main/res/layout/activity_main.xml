@@ -53,7 +53,6 @@
                 android:layout_height="60dp"
                 android:layout_gravity="center"
                 android:backgroundTint="@color/btnOrange"
-
                 android:text="@string/btnTxtLoginUser"
                 android:textSize="16sp" />
 
@@ -87,29 +86,11 @@
                 style="@style/Widget.Material3.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
-                android:gravity="center_vertical"
+                android:gravity="center_horizontal"
                 android:textColor="@color/white"
                 android:textSize="24sp"
-                android:text="@string/txtLogInWith" />
+                android:text="@string/txtforSlogan" />
 
-            <Button
-                android:id="@+id/button4"
-                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="G"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/button5"
-                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:text="F"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
 
         </LinearLayout>
 

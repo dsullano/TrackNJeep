@@ -2,12 +2,10 @@ package com.example.tracknjeep_test;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -15,14 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.tracknjeep_test.auth.Login;
 import com.example.tracknjeep_test.auth.Register;
-import com.example.tracknjeep_test.R;
-import com.example.tracknjeep_test.fragments.Add;
-import com.example.tracknjeep_test.fragments.Home;
-import com.example.tracknjeep_test.fragments.Maps;
-import com.example.tracknjeep_test.fragments.Notifications;
-import com.example.tracknjeep_test.fragments.Settings;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Register.class);
-                startActivity(intent);
+                Register register = new Register();
+                register.show(getSupportFragmentManager(),"RegisterBottomeSheetDIalog");
             }
         });
 
@@ -57,9 +47,8 @@ public class MainActivity extends AppCompatActivity {
         test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, HomePage.class);
-
-                startActivity(intent);
+                Login loginDialog = new Login();
+                loginDialog.show(getSupportFragmentManager(), "LoginBottomSheetDialog");
             }
         });
     }

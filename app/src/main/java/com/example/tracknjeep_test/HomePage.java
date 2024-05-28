@@ -3,19 +3,13 @@ package com.example.tracknjeep_test;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.tracknjeep_test.fragments.Add;
+import com.example.tracknjeep_test.fragments.Profile;
 import com.example.tracknjeep_test.fragments.Home;
 import com.example.tracknjeep_test.fragments.Maps;
 import com.example.tracknjeep_test.fragments.Notifications;
 import com.example.tracknjeep_test.fragments.Settings;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -23,7 +17,7 @@ public class HomePage extends AppCompatActivity {
 
     BottomNavigationView footer;
     Home home = new Home();
-    Add add = new Add();
+    Profile add = new Profile();
     Maps maps = new Maps();
     Notifications notifications = new Notifications();
     Settings settings = new Settings();

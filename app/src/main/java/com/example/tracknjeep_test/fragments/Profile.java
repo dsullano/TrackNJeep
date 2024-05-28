@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.tracknjeep_test.R;
 
-public class Add extends Fragment {
+public class Profile extends Fragment {
 
 
     @Override
