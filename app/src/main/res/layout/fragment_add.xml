@@ -159,7 +159,7 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/textView18"
+                            android:id="@+id/textView19"
                             android:layout_width="match_parent"
                             android:layout_height="54dp"
                             android:text="Male"
@@ -202,7 +202,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:id="@+id/textView17"
+                            android:id="@+id/textView18"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"

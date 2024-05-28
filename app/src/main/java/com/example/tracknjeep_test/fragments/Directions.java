@@ -20,6 +20,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,7 +40,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class Directions extends Fragment implements OnMapReadyCallback {
+public class Directions extends BottomSheetDialogFragment implements OnMapReadyCallback {
 
     private String fromLocation;
     private String toLocation;
@@ -60,7 +61,6 @@ public class Directions extends Fragment implements OnMapReadyCallback {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_directions, container, false);
         transitDetailsText = view.findViewById(R.id.transit_details_top);
-        transitAvailable = view.findViewById(R.id.transit_available);
         transitETA = view.findViewById(R.id.transit_duration);
         transitCost = view.findViewById(R.id.transit_cost_normal);
         transitDiscount = view.findViewById(R.id.transit_cost_discount);
@@ -157,7 +157,6 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                             for (com.google.maps.model.DirectionsLeg leg : route.legs) {
                                 for (com.google.maps.model.DirectionsStep step : leg.steps) {
                                     if (step.transitDetails != null) {
-                                        // Add marker for the transit stop
                                         LatLng transitStop = new LatLng(
                                                 step.transitDetails.departureStop.location.lat,
                                                 step.transitDetails.departureStop.location.lng
@@ -168,7 +167,6 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                                                 .snippet(step.transitDetails.line.agencies[0].name)
                                         );
 
-                                        // Add marker for the transit end stop
                                         LatLng transitEndStop = new LatLng(
                                                 step.transitDetails.arrivalStop.location.lat,
                                                 step.transitDetails.arrivalStop.location.lng
@@ -179,7 +177,6 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                                                 .snippet(step.transitDetails.line.agencies[0].name)
                                         );
 
-                                        // Collect jeepney route names
                                         if (step.transitDetails.line.shortName != null) {
                                             jeepneyRoutes.add(step.transitDetails.line.shortName);
                                         }
@@ -187,8 +184,7 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                                 }
                             }
 
-                            // Fetch and process jeepney routes from Firebase
-                            fetchJeepneyRoutes(fromLocation, toLocation, jeepneyRoutes);
+                            // fetchJeepneyRoutes(fromLocation, toLocation, jeepneyRoutes);
 
                             for (String routeName : jeepneyRoutes) {
                                 transitDetails.append(routeName).append("\n");
@@ -220,65 +216,31 @@ public class Directions extends Fragment implements OnMapReadyCallback {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://tracknjeep-f4109-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("jeepneyRoutes");
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (isAdded()) {
-                    String[] fromLocations = fromLocation.toUpperCase().split("\\s*-\\s*");
-                    String[] toLocations = toLocation.toUpperCase().split("\\s*-\\s*");
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    String routeName = snapshot.child("routeName").getValue(String.class);
+                    String startLocation = snapshot.child("startLocation").getValue(String.class);
+                    String endLocation = snapshot.child("endLocation").getValue(String.class);
 
-                    for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
-                        String routeCode = routeSnapshot.child("code").getValue(String.class);
-                        String routePath = routeSnapshot.child("routes").getValue(String.class);
-
-                        String[] routePathWords = routePath.toUpperCase().split("\\s*-\\s*");
-
-                        boolean containsFromLocation = containsAny(routePathWords, fromLocations);
-                        boolean containsToLocation = containsAny(routePathWords, toLocations);
-
-                        if (containsFromLocation || containsToLocation) {
-                            jeepneyRoutes.add(routeCode);
-                            Log.d("JeepneyRouteMatch", "Match found: " + routeCode + " for route: " + routePath);
+                    if (routeName != null && startLocation != null && endLocation != null) {
+                        if (fromLocation.contains(startLocation) && toLocation.contains(endLocation)) {
+                            jeepneyRoutes.add(routeName);
                         }
                     }
-
-                    // Update UI with jeepney routes
-                    getActivity().runOnUiThread(() -> {
-                        if (isAdded()) {
-                            StringBuilder transitDetails = new StringBuilder();
-                            for (String routeName : jeepneyRoutes) {
-                                transitDetails.append(routeName).append("\n");
-                            }
-                            transitDetailsText.setText(transitDetails.toString());
-                        }
-                    });
                 }
+                // Update UI with the fetched jeepney routes
+                getActivity().runOnUiThread(() -> {
+                    StringBuilder transitDetails = new StringBuilder();
+                    for (String routeName : jeepneyRoutes) {
+                        transitDetails.append(routeName).append("\n");
+                    }
+                });
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Handle possible errors.
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.w("Directions", "Failed to read value.", databaseError.toException());
             }
         });
-    }
-
-    private boolean containsAny(String[] array, String[] targets) {
-        for (String target : targets) {
-            for (String element : array) {  
-                if (element.contains(target)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private double distanceBetween(LatLng point1, LatLng point2) {
-        double earthRadius = 6371; // km
-        double dLat = Math.toRadians(point2.latitude - point1.latitude);
-        double dLng = Math.toRadians(point2.longitude - point1.longitude);
-        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(Math.toRadians(point1.latitude)) * Math.cos(Math.toRadians(point2.latitude)) *
-                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return earthRadius * c;
     }
 }

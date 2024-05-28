@@ -43,14 +43,6 @@
                 android:textSize="18sp" />
 
 
-            <TextView
-                android:id="@+id/transit_available"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/available_jeepneys"
-                android:gravity="center"
-                android:textSize="18sp"
-                android:padding="16dp" />
 
             <TextView
                 android:id="@+id/transit_duration"

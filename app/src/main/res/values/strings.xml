@@ -20,12 +20,12 @@
     <string name="txtAbout">About</string>
     <string name="txtPrivacyPolicy">Privacy Policy</string>
     <string name="txtLogOut">Log Out</string>
-    
-    
+
+
     <string name="title_activity_maps">MapsActivity</string>
     <string name="go">Go</string>
     <string name="enter_destination">Enter destination</string>
-    <string name="destination">Destination:</string>
+    <string name="destination">To:      </string>
     <string name="enter_from_location">Enter from location</string>
     <string name="from">From:</string>
     <string name="transit_details_will_be_shown_here">Transit Details will be shown here</string>
@@ -33,7 +33,7 @@
     <string name="estimated_time_of_arrival">Estimated Time of Arrival:</string>
     <string name="estimated_code">Estimated Code:</string>
     <string name="fare_cost_discounted">Fare Cost (Discounted):</string>
-    
+
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
@@ -45,5 +45,15 @@
     <string name="login_failed">"Login failed"</string>
 
     <!--Profile PArttuee -->
-    <string name ="txtProfile">Profile</string>
+    <string name="txtProfile">Profile</string>
+    <string name="explore_places_here">Explore places here...</string>
+    <string name="click_here_to_find_your_jeep">Click here to find your jeep!</string>
+    <string name="ready_to_travel">Ready to Travel?</string>
+    <string name="enter_a_place_and_make_it_2">Enter a place and make it 2!</string>
+    <string name="track_your_jeep">Track Your Jeep!</string>
+    <string name="find_your_jeep">Find Your Jeep!</string>
+    <string name="enter_jeepney_code">Enter Jeepney Code....</string>
+    <string name="think_a_jeep">Think A Jeep.</string>
+    <string name="routes">Routes: </string>
+    <string name="destination2">Routes: </string>
 </resources>

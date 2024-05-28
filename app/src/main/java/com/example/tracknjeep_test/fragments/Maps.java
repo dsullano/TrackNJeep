@@ -32,6 +32,7 @@ public class Maps extends Fragment implements OnMapReadyCallback {
         View view = inflater.inflate(R.layout.fragment_maps, container, false);
 
         searchLocation = view.findViewById(R.id.search_location);
+        searchLocation.setQueryHint("Search Location");
 
         searchLocation.setOnQueryTextListener(new androidx.appcompat.widget.SearchView.OnQueryTextListener() {
             @Override
@@ -85,7 +86,6 @@ public class Maps extends Fragment implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker and move the camera
         LatLng citu = new LatLng(10.29441995166696, 123.8811194524);
         mMap.addMarker(new MarkerOptions().position(citu).title("CIT-U"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(citu, 15));

@@ -10,17 +10,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:elevation="5dp"
+        android:queryHint="@string/explore_places_here"
         android:background="@drawable/search_view_bg"
-        android:queryHint="Search Location"
         android:iconifiedByDefault="false"
         android:focusable="true"
         android:clickable="true"
-        android:layout_alignParentTop="true"/> <!-- Position SearchView at the top -->
+        android:layout_alignParentTop="true"/>
 
     <FrameLayout
         android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/search_location"/> <!-- Position FrameLayout below SearchView -->
+        android:layout_below="@id/search_location"/>
+
+
 
 </RelativeLayout>
