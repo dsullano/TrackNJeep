@@ -14,7 +14,12 @@
     <!-- Setting Screen -->
     <string name="txtSettings">Settings</string>
     <string name="btnBack">Back Button</string>
-    <string name="txtNotif">Notifications</string>
+    <string name="txtDarkMode">Dark Mode</string>
+    <string name="txtAbout">About</string>
+    <string name="txtPrivacyPolicy">Privacy Policy</string>
+    <string name="txtLogOut">Log Out</string>
+    
+    
     <string name="title_activity_maps">MapsActivity</string>
     <string name="go">Go</string>
     <string name="enter_destination">Enter destination</string>
@@ -26,6 +31,7 @@
     <string name="estimated_time_of_arrival">Estimated Time of Arrival:</string>
     <string name="estimated_code">Estimated Code:</string>
     <string name="fare_cost_discounted">Fare Cost (Discounted):</string>
+    
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
