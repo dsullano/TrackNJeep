@@ -1,5 +1,6 @@
 package com.example.tracknjeep_test;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -12,6 +13,7 @@ import com.example.tracknjeep_test.fragments.Notifications;
 import com.example.tracknjeep_test.fragments.Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class HomePage extends AppCompatActivity {
 
@@ -21,13 +23,21 @@ public class HomePage extends AppCompatActivity {
     Maps maps = new Maps();
     Notifications notifications = new Notifications();
     Settings settings = new Settings();
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        mAuth = FirebaseAuth.getInstance();
         footer = findViewById(R.id.footer);
+
+        if (mAuth.getCurrentUser() == null) {
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+            return;
+        }
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
 

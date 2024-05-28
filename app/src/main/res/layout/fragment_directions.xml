@@ -39,10 +39,12 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textColor="@color/white"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
+                android:fontFamily="@font/roboto_slab_bold"
                 android:id="@+id/transit_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
 
             <TextView
                 android:id="@+id/transit_cost_normal"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -67,6 +70,7 @@
             <TextView
                 android:id="@+id/transit_cost_discount"
                 android:layout_width="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:paddingBottom="5dp"

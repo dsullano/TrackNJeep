@@ -17,61 +17,81 @@
             android:layout_marginBottom="20dp"
             android:gravity="center"
             android:text="@string/registerText"
+            android:fontFamily="@font/roboto_slab_bold"
             android:textSize="28sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/emailText"
                 android:layout_width="match_parent"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:layout_height="wrap_content"
                 android:hint="@string/emailDefault" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/passwordDefault" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/firstNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:hint="First Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/lastNameText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:hint="Last Name" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birthdateText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
+            android:hint="Birthdate"
+            android:inputType="date"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
+            android:fontFamily="@font/roboto_slab_bold"
+
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/genderText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:hint="Gender" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,6 +106,7 @@
             style="@style/Widget.Material3.Button.UnelevatedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:backgroundTint="@color/main"

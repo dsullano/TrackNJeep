@@ -60,7 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:fontFamily="sans-serif-medium"
+                        android:fontFamily="@font/roboto_slab_bold"
                         android:gravity="center|center_horizontal|center_vertical"
                         android:text="@string/txtSettings"
                         android:textSize="34sp" />
@@ -83,6 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
+                        android:fontFamily="@font/roboto_slab_bold"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:text="@string/txtDarkMode" />
@@ -113,6 +114,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
+                        android:fontFamily="@font/roboto_slab_bold"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:text="@string/txtAbout" />
@@ -136,6 +138,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
+                        android:fontFamily="@font/roboto_slab_bold"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:text="@string/txtPrivacyPolicy" />
@@ -158,6 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="6"
+                        android:fontFamily="@font/roboto_slab_bold"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
                         android:text="@string/txtLogOut"

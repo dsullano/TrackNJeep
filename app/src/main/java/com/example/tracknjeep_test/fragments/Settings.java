@@ -1,5 +1,6 @@
 package com.example.tracknjeep_test.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +12,9 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.example.tracknjeep_test.MainActivity;
 import com.example.tracknjeep_test.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -72,11 +75,16 @@ public class Settings extends Fragment {
         llLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Log Out Clicked", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                getActivity().finish();
+                Toast.makeText(getContext(), "Successfully Logged Out", Toast.LENGTH_SHORT).show();
+
             }
         });
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 

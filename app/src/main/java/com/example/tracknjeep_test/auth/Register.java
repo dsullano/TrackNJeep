@@ -34,7 +34,7 @@ public class Register extends BottomSheetDialogFragment {
     private FirebaseAuth mAuth;
     private FirebaseDatabase database;
 
-    private TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName, editTextGender;
+    private TextInputEditText editTextEmail, editTextPassword, editTextFirstName, editTextLastName, editTextGender, editTextBirthdate;
     private Button btnRegister;
     private ProgressBar progBar;
 
@@ -53,6 +53,7 @@ public class Register extends BottomSheetDialogFragment {
         editTextGender = view.findViewById(R.id.genderText);
         progBar = view.findViewById(R.id.registerProgBar);
         btnRegister = view.findViewById(R.id.registerBtn);
+        editTextBirthdate = view.findViewById(R.id.birthdateText);
 
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,6 +74,7 @@ public class Register extends BottomSheetDialogFragment {
         String firstName = editTextFirstName.getText().toString().trim();
         String lastName = editTextLastName.getText().toString().trim();
         String gender = editTextGender.getText().toString().trim();
+        String birthdate = editTextBirthdate.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(firstName) ||
                 TextUtils.isEmpty(lastName) || TextUtils.isEmpty(gender)) {
@@ -190,6 +192,24 @@ public class Register extends BottomSheetDialogFragment {
         jeepneyRoutes.put("37B", new Jeepney("37B", "MABOLO - CARBON", "MABOLO - SM CITY - COLON - CARBON"));
         jeepneyRoutes.put("38D", new Jeepney("38D", "PIT-OS - LAHUG", "PIT-OS - TALAMBAN - BANILAD - LAHUG"));
         jeepneyRoutes.put("39A", new Jeepney("39A", "TISA - AYALA", "TISA - LABANGON - V. RAMA - AYALA"));
+        jeepneyRoutes.put("44A", new Jeepney("44A", "MAMBALING - AYALA CENTER CEBU", "MAMBALING - PUNTA - INAYAWAN - V RAMA - AYALA CENTER CEBU"));
+        jeepneyRoutes.put("45B", new Jeepney("45B", "CARBON - TALAMBAN", "CARBON - COLON - FUENTE - BANILAD - TALAMBAN"));
+        jeepneyRoutes.put("46C", new Jeepney("46C", "LAPU-LAPU CITY - SM CITY CEBU", "LAPU-LAPU CITY - PAJAC - MEPZ 1 - MEPZ 2 - IBO - OLD AIRPORT RD - UGONG - SM CITY CEBU"));
+        jeepneyRoutes.put("47D", new Jeepney("47D", "CONSOLACION - COLON", "CONSOLACION - LILOAN - PAJAC - PUSOK - LAPU-LAPU CITY - MEPZ 1 - MEPZ 2 - IBO - OLD AIRPORT RD - UGONG - SM CITY CEBU - COLON"));
+        jeepneyRoutes.put("48E", new Jeepney("48E", "MANDAUE CITY - TALAMBAN", "MANDAUE CITY - JAGOBIAO - PAGSABUNGAN - CASUNTINGAN - TALAMBAN"));
+        jeepneyRoutes.put("49F", new Jeepney("49F", "NAGA - CEBU CITY HALL", "NAGA - TINAAN - SAN FERNANDO - CARCAR - TALISAY - SRP - CEBU CITY HALL"));
+        jeepneyRoutes.put("50G", new Jeepney("50G", "CORDOVA - MAMBALING", "CORDOVA - PILAR - PAJAC - OLD AIRPORT RD - PAKNAAN - CONSOLACION - SM CITY CEBU - MAMBALING"));
+        jeepneyRoutes.put("51H", new Jeepney("51H", "TALISAY - MANDAUE CITY", "TALISAY - BULACAO - SRP - CEBU CITY HALL - NORTH RECLAMATION AREA - MANDAUE CITY"));
+        jeepneyRoutes.put("52I", new Jeepney("52I", "SAN FERNANDO - LAPU-LAPU CITY", "SAN FERNANDO - CARCAR - TALISAY - SRP - IL CORSO - LAWAAN - CORDOVA - BASAK - PAJAC - GY - MARIGONDON"));
+        jeepneyRoutes.put("53J", new Jeepney("53J", "TOLEDO CITY - COLON", "TOLEDO CITY - PINAMUNGAHAN - NAGA - SAN FERNANDO - CARCAR - SRP - CEBU CITY HALL - COLON"));
+        jeepneyRoutes.put("54K", new Jeepney("54K", "BARILI - MAMBALING", "BARILI - CARCAR - TALISAY - SRP - CEBU CITY HALL - SOUTH RECLAMATION AREA - IL CORSO - CORDOVA - IBO - OLD AIRPORT RD - UGONG - SM CITY CEBU - MAMBALING"));
+        jeepneyRoutes.put("55L", new Jeepney("55L", "ARGAO - COLON", "ARGAO - DALAGUETE - ALCOY - BOLJOON - OSLOB - SANTANDER - TOLEDO CITY - PINAMUNGAHAN - NAGA - SAN FERNANDO - CARCAR - SRP - CEBU CITY HALL - COLON"));
+        jeepneyRoutes.put("16K", new Jeepney("16K", "TALISAY - COLON", "TALISAY - SRP - CEBU CITY HALL - COLON"));
+        jeepneyRoutes.put("17L", new Jeepney("17L", "CARCAR - MANDAUE CITY", "CARCAR - SAN FERNANDO - NAGA - TOLEDO CITY - PINAMUNGAHAN - CEBU CITY HALL - MANDAUE CITY"));
+        jeepneyRoutes.put("18M", new Jeepney("18M", "NAGA - IT PARK", "NAGA - SAN FERNANDO - CARCAR - TALISAY - SRP - CEBU CITY HALL - FUENTE - IT PARK"));
+        jeepneyRoutes.put("19N", new Jeepney("19N", "BOLJOON - SM CITY CEBU", "BOLJOON - OSLOB - SANTANDER - TOLEDO CITY - PINAMUNGAHAN - CEBU CITY HALL - SM CITY CEBU"));
+        jeepneyRoutes.put("20O", new Jeepney("20O", "ALCOY - AYALA CENTER CEBU", "ALCOY - BOLJOON - OSLOB - SANTANDER - TOLEDO CITY - PINAMUNGAHAN - NAGA - SAN FERNANDO - CARCAR - TALISAY - SRP - CEBU CITY HALL - AYALA CENTER CEBU"));
+
 
         for (Map.Entry<String, Jeepney> entry : jeepneyRoutes.entrySet()) {
             String code = entry.getKey();

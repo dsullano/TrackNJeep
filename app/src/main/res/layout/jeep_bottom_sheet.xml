@@ -14,12 +14,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:fontFamily="@font/roboto_slab_bold"
             android:gravity="center_horizontal">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:textColor="@color/white"
                 android:textSize="32sp"
                 android:text="@string/find_your_jeep" />
 
@@ -34,6 +37,7 @@
                 <TextView
                     android:id="@+id/findTxtView"
                     android:layout_width="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
                     android:layout_height="wrap_content"
                     android:textSize="16sp" />
 
@@ -41,6 +45,7 @@
                     android:id="@+id/findTxtEdit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_slab_bold"
                     android:hint="@string/enter_jeepney_code"
                     android:inputType="text" />
 
@@ -50,6 +55,7 @@
                 android:id="@+id/goBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_slab_bold"
                 android:text="@string/go"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp" />

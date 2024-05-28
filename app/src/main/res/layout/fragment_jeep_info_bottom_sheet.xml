@@ -19,6 +19,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/destination2"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto_slab_bold"
             android:textSize="18sp"
             android:layout_gravity="center"
             android:textStyle="bold" />
@@ -38,8 +40,9 @@
             android:id="@+id/routesTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_gravity="center"
-
+            android:textColor="@color/white"
             android:text="@string/routes"
             android:textSize="16sp" />
 

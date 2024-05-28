@@ -56,4 +56,20 @@
     <string name="think_a_jeep">Think A Jeep.</string>
     <string name="routes">Routes: </string>
     <string name="destination2">Routes: </string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="hashedPass">******</string>
+    <string name="mobile_number">Mobile Number</string>
+    <string name="_1234567890">1234567890</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender:</string>
+    <string name="kumar">Kumar</string>
+    <string name="bolante">Bolante</string>
+    <string name="val">Val</string>
+    <string name="first_name">First Name:</string>
+    <string name="example_email_com">example@email.com</string>
+    <string name="email">Email:</string>
+    <string name="val_bolante">Val Bolante</string>
+    <string name="profile">Profile</string>
+    <string name="lastname">Lastname:</string>
+    <string name="social_media">Social Media</string>
 </resources>

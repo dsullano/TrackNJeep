@@ -14,27 +14,32 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="28sp"
+        android:fontFamily="@font/roboto_slab_bold"
         android:textStyle="bold"
         android:gravity="center"
         android:layout_marginBottom="20dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:fontFamily="@font/roboto_slab_bold"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/emailText"
             android:hint="@string/emailDefault"
+            android:fontFamily="@font/roboto_slab_bold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:fontFamily="@font/roboto_slab_bold"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordText"
+            android:fontFamily="@font/roboto_slab_bold"
             android:hint="@string/passwordDefault"
             android:layout_height="wrap_content"
             android:layout_width="match_parent" />
@@ -49,6 +54,7 @@
     <Button
         android:id="@+id/logInBtn"
         android:text="@string/loginText"
+        android:fontFamily="@font/roboto_slab_bold"
         style="@style/Widget.Material3.Button.UnelevatedButton"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
