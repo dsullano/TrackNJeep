@@ -12,6 +12,8 @@ import androidx.annotation.Nullable;
 
 import com.example.tracknjeep_test.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,8 @@ public class JeepInfoBottomSheet extends BottomSheetDialogFragment {
     private String jeepCode;
     private TextView destinationTextView;
     private TextView routesTextView;
+    private DatabaseReference favoritesRef;
+    private FirebaseUser currentUser;
 
     public static JeepInfoBottomSheet newInstance(String jeepCode) {
         JeepInfoBottomSheet fragment = new JeepInfoBottomSheet();
@@ -40,6 +44,8 @@ public class JeepInfoBottomSheet extends BottomSheetDialogFragment {
         if (getArguments() != null) {
             jeepCode = getArguments().getString(ARG_JEEP_CODE);
         }
+        favoritesRef = FirebaseDatabase.getInstance("https://tracknjeep-f4109-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("favorites");
+        currentUser = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Nullable
@@ -51,6 +57,13 @@ public class JeepInfoBottomSheet extends BottomSheetDialogFragment {
         routesTextView = view.findViewById(R.id.routesTextView);
 
         fetchJeepInfo();
+
+        view.findViewById(R.id.favoriteButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addFavorite(jeepCode);
+            }
+        });
 
         return view;
     }
@@ -81,5 +94,22 @@ public class JeepInfoBottomSheet extends BottomSheetDialogFragment {
                 Toast.makeText(getContext(), "Failed to fetch data: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void addFavorite(String jeepCode) {
+        if (currentUser != null) {
+            String userId = currentUser.getUid();
+            String favoriteId = favoritesRef.push().getKey();
+
+            if (favoriteId != null) {
+                favoritesRef.child(favoriteId).child("userId").setValue(userId);
+                favoritesRef.child(favoriteId).child("jeepCode").setValue(jeepCode);
+                Toast.makeText(getContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "Failed to add to Favorites", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(getContext(), "User not authenticated", Toast.LENGTH_SHORT).show();
+        }
     }
 }

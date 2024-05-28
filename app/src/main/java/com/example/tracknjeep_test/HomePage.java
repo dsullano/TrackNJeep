@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tracknjeep_test.fragments.Profile;
 import com.example.tracknjeep_test.fragments.Home;
 import com.example.tracknjeep_test.fragments.Maps;
-import com.example.tracknjeep_test.fragments.Notifications;
+import com.example.tracknjeep_test.fragments.Favorites;
 import com.example.tracknjeep_test.fragments.Settings;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -21,7 +21,7 @@ public class HomePage extends AppCompatActivity {
     Home home = new Home();
     Profile add = new Profile();
     Maps maps = new Maps();
-    Notifications notifications = new Notifications();
+    Favorites notifications = new Favorites();
     Settings settings = new Settings();
     FirebaseAuth mAuth;
 

@@ -72,4 +72,7 @@
     <string name="profile">Profile</string>
     <string name="lastname">Lastname:</string>
     <string name="social_media">Social Media</string>
+    <string name="add_to_favorites">Add to Favorites</string>
+    <string name="favorites">Favorites:</string>
+    <string name="no_favorites_yet">No favorites yet</string>
 </resources>

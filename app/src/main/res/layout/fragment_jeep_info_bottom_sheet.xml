@@ -48,4 +48,19 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/favoriteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_to_favorites"
+        style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+
+        android:background="@drawable/rounded_colors_backgrounz"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/roboto_slab_bold"
+        android:textColor="@android:color/white"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" />
+
 </LinearLayout>
