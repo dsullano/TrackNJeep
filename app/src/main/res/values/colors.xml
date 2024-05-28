@@ -4,4 +4,5 @@
     <color name="main">#55D69E</color>
     <color name="btnOrange">#DF7B38</color>
     <color name="teal_700">#20CFB5</color>
+    <color name="black">#000000</color>
 </resources>
