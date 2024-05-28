@@ -4,12 +4,14 @@
     <string name="btnTxtLoginGuest">Continue as Guest</string>
     <string name="txtLogInWith">Log in with </string>
     <string name="loginText">LOGIN</string>
+    <string name="loginTextSmall">Login</string>
+    <string name="registerTextSmall">Register</string>
     <string name="emailDefault">Email</string>
     <string name="passwordDefault">Password</string>
     <string name="registerText">REGISTER</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="txtforSlogan">"One Jeep One Click"</string>
+    <string name="txtforSlogan">"One Jeep, One Click"</string>
 
     <!-- Setting Screen -->
     <string name="txtSettings">Settings</string>

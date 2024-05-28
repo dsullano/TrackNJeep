@@ -1,81 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+android:weightSum="2">
+
+<FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/frame_layout_container"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.Home">
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:padding="8dp"
+    android:background="@drawable/rounded_corners_background"
+    android:id="@+id/frame_layout_top"
+    android:layout_margin="32dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:padding="8dp">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center"
+        android:background="@drawable/rounded_corners_background"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/fromTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/from"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/fromTxtEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_from_location"
+            android:inputType="text" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/fromTxtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/from"
-                android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/fromTxtEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="@string/enter_from_location"
-                android:inputType="text" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/toTxtView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/destination"
+            android:textSize="16sp" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/toTextEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:hint="@string/enter_destination"
+            android:inputType="text" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/toTxtView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:text="@string/destination"
-                android:textSize="16sp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
-            <EditText
-                android:id="@+id/toTextEdit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:hint="@string/enter_destination"
-                android:inputType="text" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/goBtn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:id="@+id/goBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="@string/go" />
-        </LinearLayout>
+            android:layout_marginTop="20dp"
+            android:text="@string/go" />
+    </LinearLayout>
 
     </LinearLayout>
 
 </FrameLayout>
+
+<FrameLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:background="@color/main">
+    <!-- Add your content here -->
+</FrameLayout>
+
+</LinearLayout>
