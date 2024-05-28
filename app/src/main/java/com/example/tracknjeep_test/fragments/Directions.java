@@ -1,6 +1,7 @@
 package com.example.tracknjeep_test.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.DirectionsApi;
@@ -29,7 +35,6 @@ import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.TravelMode;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -114,10 +119,9 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                 DirectionsResult result = DirectionsApi.newRequest(getGeoContext())
                         .origin(new com.google.maps.model.LatLng(origin.latitude, origin.longitude))
                         .destination(new com.google.maps.model.LatLng(destination.latitude, destination.longitude))
-                        .mode(TravelMode.TRANSIT) // Set the travel mode to TRANSIT
-                        .alternatives(true)
+                        .mode(TravelMode.TRANSIT) // Ensure transit mode
+                        .alternatives(false) // Get the primary transit route
                         .await();
-
 
                 if (result.routes != null && result.routes.length > 0) {
                     DirectionsRoute route = result.routes[0];
@@ -143,73 +147,67 @@ public class Directions extends Fragment implements OnMapReadyCallback {
                     long minutes = (totalDuration % 3600) / 60;
 
                     getActivity().runOnUiThread(() -> {
-                        PolylineOptions opts = new PolylineOptions().addAll(path).color(getResources().getColor(R.color.teal_700)).width(5);
-                        mMap.addPolyline(opts);
+                        if (isAdded()) {
+                            PolylineOptions opts = new PolylineOptions().addAll(path).color(getResources().getColor(R.color.teal_700)).width(5);
+                            mMap.addPolyline(opts);
 
-                        // Collect all unique jeepney routes
-                        Set<String> jeepneyRoutes = new HashSet<>();
-                        StringBuilder transitDetails = new StringBuilder();
-                        for (com.google.maps.model.DirectionsLeg leg : route.legs) {
-                            for (com.google.maps.model.DirectionsStep step : leg.steps) {
-                                if (step.transitDetails != null) {
-                                    // Add marker for the transit stop
-                                    LatLng transitStop = new LatLng(
-                                            step.transitDetails.departureStop.location.lat,
-                                            step.transitDetails.departureStop.location.lng
-                                    );
-                                    mMap.addMarker(new MarkerOptions()
-                                            .position(transitStop)
-                                            .title(step.transitDetails.line.shortName + " - " + step.transitDetails.headsign)
-                                            .snippet(step.transitDetails.line.agencies[0].name)
-                                    );
+                            // Collect all unique jeepney routes
+                            Set<String> jeepneyRoutes = new HashSet<>();
+                            StringBuilder transitDetails = new StringBuilder();
+                            for (com.google.maps.model.DirectionsLeg leg : route.legs) {
+                                for (com.google.maps.model.DirectionsStep step : leg.steps) {
+                                    if (step.transitDetails != null) {
+                                        // Add marker for the transit stop
+                                        LatLng transitStop = new LatLng(
+                                                step.transitDetails.departureStop.location.lat,
+                                                step.transitDetails.departureStop.location.lng
+                                        );
+                                        mMap.addMarker(new MarkerOptions()
+                                                .position(transitStop)
+                                                .title(step.transitDetails.line.shortName + " - " + step.transitDetails.headsign)
+                                                .snippet(step.transitDetails.line.agencies[0].name)
+                                        );
 
-                                    // Add marker for the transit end stop
-                                    LatLng transitEndStop = new LatLng(
-                                            step.transitDetails.arrivalStop.location.lat,
-                                            step.transitDetails.arrivalStop.location.lng
-                                    );
-                                    mMap.addMarker(new MarkerOptions()
-                                            .position(transitEndStop)
-                                            .title("End: " + step.transitDetails.line.shortName)
-                                            .snippet(step.transitDetails.line.agencies[0].name)
-                                    );
+                                        // Add marker for the transit end stop
+                                        LatLng transitEndStop = new LatLng(
+                                                step.transitDetails.arrivalStop.location.lat,
+                                                step.transitDetails.arrivalStop.location.lng
+                                        );
+                                        mMap.addMarker(new MarkerOptions()
+                                                .position(transitEndStop)
+                                                .title("End: " + step.transitDetails.line.shortName)
+                                                .snippet(step.transitDetails.line.agencies[0].name)
+                                        );
 
-                                    // Collect jeepney route names
-                                    if (step.transitDetails.line.shortName != null) {
-                                        jeepneyRoutes.add(step.transitDetails.line.shortName);
+                                        // Collect jeepney route names
+                                        if (step.transitDetails.line.shortName != null) {
+                                            jeepneyRoutes.add(step.transitDetails.line.shortName);
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                        // Display all unique jeepney routes
-                        List<JeepneyRoute> jeepneyRoutesList = getJeepneyRoutes();
-                        for (JeepneyRoute jeepneyRoute : jeepneyRoutesList) {
-                            for (LatLng coord : jeepneyRoute.getRoute()) {
-                                if (path.contains(coord)) {
-                                    jeepneyRoutes.add(jeepneyRoute.getName());
-                                    break;
-                                }
+                            // Fetch and process jeepney routes from Firebase
+                            fetchJeepneyRoutes(fromLocation, toLocation, jeepneyRoutes);
+
+                            for (String routeName : jeepneyRoutes) {
+                                transitDetails.append(routeName).append("\n");
                             }
-                        }
+                            transitDetailsText.setText(transitDetails.toString());
 
-                        for (String routeName : jeepneyRoutes) {
-                            transitDetails.append(routeName).append("\n");
-                        }
-                        transitDetailsText.setText(transitDetails.toString());
+                            String distanceDurationText = String.format("Distance: %.2f km\n\nEstimated Travel Time: %d hours %d minutes", distanceInKm, hours, minutes);
+                            transitETA.setText(distanceDurationText);
 
-                        String distanceDurationText = String.format("Distance: %.2f km\n\nEstimated Travel Time: %d hours %d minutes", distanceInKm, hours, minutes);
-                        transitETA.setText(distanceDurationText);
-
-                        double cost = ((distanceInKm - 4) * 2.1) + 13;
-                        if (cost < 13) {
-                            cost = 13;
+                            double cost = ((distanceInKm - 4) * 1.9) + 13;
+                            if (cost < 13) {
+                                cost = 13;
+                            }
+                            double discount = cost * .80;
+                            String costText = String.format("Cost: %.2f", cost);
+                            String discountText = String.format("Discounted Price: %.2f", discount);
+                            transitCost.setText(costText);
+                            transitDiscount.setText(discountText);
                         }
-                        double discount = cost * .80;
-                        String costText = String.format("Cost: %.2f", cost);
-                        String discountText = String.format("Discounted Price: %.2f", discount);
-                        transitCost.setText(costText);
-                        transitDiscount.setText(discountText);
                     });
                 }
             } catch (Exception e) {
@@ -218,40 +216,69 @@ public class Directions extends Fragment implements OnMapReadyCallback {
         }).start();
     }
 
-    private List<JeepneyRoute> getJeepneyRoutes() {
-        List<JeepneyRoute> jeepneyRoutes = new ArrayList<>();
+    private void fetchJeepneyRoutes(String fromLocation, String toLocation, Set<String> jeepneyRoutes) {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://tracknjeep-f4109-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("jeepneyRoutes");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (isAdded()) {
+                    String[] fromLocations = fromLocation.toUpperCase().split("\\s*-\\s*");
+                    String[] toLocations = toLocation.toUpperCase().split("\\s*-\\s*");
 
-        // Sample data for jeepney routes
-        List<LatLng> route1Coordinates = new ArrayList<>();
-        route1Coordinates.add(new LatLng(14.5995, 120.9842));
-        route1Coordinates.add(new LatLng(14.6000, 120.9850));
-        route1Coordinates.add(new LatLng(14.6010, 120.9860));
-        jeepneyRoutes.add(new JeepneyRoute("Route 1", route1Coordinates));
+                    for (DataSnapshot routeSnapshot : snapshot.getChildren()) {
+                        String routeCode = routeSnapshot.child("code").getValue(String.class);
+                        String routePath = routeSnapshot.child("routes").getValue(String.class);
 
-        List<LatLng> route2Coordinates = new ArrayList<>();
-        route2Coordinates.add(new LatLng(14.5990, 120.9830));
-        route2Coordinates.add(new LatLng(14.5995, 120.9845));
-        route2Coordinates.add(new LatLng(14.6005, 120.9855));
-        jeepneyRoutes.add(new JeepneyRoute("Route 2", route2Coordinates));
+                        String[] routePathWords = routePath.toUpperCase().split("\\s*-\\s*");
 
-        return jeepneyRoutes;
+                        boolean containsFromLocation = containsAny(routePathWords, fromLocations);
+                        boolean containsToLocation = containsAny(routePathWords, toLocations);
+
+                        if (containsFromLocation || containsToLocation) {
+                            jeepneyRoutes.add(routeCode);
+                            Log.d("JeepneyRouteMatch", "Match found: " + routeCode + " for route: " + routePath);
+                        }
+                    }
+
+                    // Update UI with jeepney routes
+                    getActivity().runOnUiThread(() -> {
+                        if (isAdded()) {
+                            StringBuilder transitDetails = new StringBuilder();
+                            for (String routeName : jeepneyRoutes) {
+                                transitDetails.append(routeName).append("\n");
+                            }
+                            transitDetailsText.setText(transitDetails.toString());
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle possible errors.
+            }
+        });
     }
 
-    private static class JeepneyRoute {
-        private String name;
-        private List<LatLng> route;
-
-        public JeepneyRoute(String name, List<LatLng> route) {
-            this.name = name;
-            this.route = route;
+    private boolean containsAny(String[] array, String[] targets) {
+        for (String target : targets) {
+            for (String element : array) {  
+                if (element.contains(target)) {
+                    return true;
+                }
+            }
         }
+        return false;
+    }
 
-        public String getName() {
-            return name;
-        }
-
-        public List<LatLng> getRoute() {
-            return route;
-        }
+    private double distanceBetween(LatLng point1, LatLng point2) {
+        double earthRadius = 6371; // km
+        double dLat = Math.toRadians(point2.latitude - point1.latitude);
+        double dLng = Math.toRadians(point2.longitude - point1.longitude);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                Math.cos(Math.toRadians(point1.latitude)) * Math.cos(Math.toRadians(point2.latitude)) *
+                        Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return earthRadius * c;
     }
 }

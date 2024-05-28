@@ -58,12 +58,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, HomePage.class);
+
                 startActivity(intent);
             }
         });
-
-
-
-
     }
 }
