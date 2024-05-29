@@ -1,9 +1,12 @@
 package com.example.tracknjeep_test.fragments;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +17,15 @@ import android.widget.Toast;
 
 import com.example.tracknjeep_test.MainActivity;
 import com.example.tracknjeep_test.R;
+import com.example.tracknjeep_test.auth.Register;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.checkerframework.checker.units.qual.A;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Settings extends Fragment {
+
     public Settings() {
         // Required empty public constructor
     }
@@ -60,6 +67,9 @@ public class Settings extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "About Clicked", Toast.LENGTH_SHORT).show();
+
+                AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
+                aboutDialogFragment.show(getChildFragmentManager(), "about_dialog");
             }
         });
 
@@ -68,6 +78,9 @@ public class Settings extends Fragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Privacy Policy Clicked", Toast.LENGTH_SHORT).show();
+
+                PrivacyPolicyDialogFragment privacyPolicyDialogFragment = new PrivacyPolicyDialogFragment();
+                privacyPolicyDialogFragment.show(getChildFragmentManager(), "privacy_policy_dialog");
             }
         });
 

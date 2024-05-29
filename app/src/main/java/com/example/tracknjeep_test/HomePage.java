@@ -21,7 +21,7 @@ public class HomePage extends AppCompatActivity {
     Home home = new Home();
     Profile add = new Profile();
     Maps maps = new Maps();
-    Favorites notifications = new Favorites();
+    Favorites favorites = new Favorites();
     Settings settings = new Settings();
     FirebaseAuth mAuth;
 
@@ -55,8 +55,8 @@ public class HomePage extends AppCompatActivity {
                     case R.id.maps:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, maps).commit();
                         return true;
-                    case R.id.notifications:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, notifications).commit();
+                    case R.id.favorites:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, favorites).commit();
                         return true;
                     case R.id.settings:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, settings).commit();

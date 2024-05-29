@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/login"
     android:orientation="vertical"
     android:gravity="center"
@@ -35,14 +36,16 @@
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:fontFamily="@font/roboto_slab_bold"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:passwordToggleEnabled="true">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordText"
             android:fontFamily="@font/roboto_slab_bold"
             android:hint="@string/passwordDefault"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent" />
+            android:layout_width="match_parent"
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <ProgressBar
