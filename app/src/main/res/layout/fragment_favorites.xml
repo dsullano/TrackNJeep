@@ -1,36 +1,46 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
+    <!-- Title TextView -->
     <TextView
         android:id="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="145dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="50dp"
+        android:paddingBottom="15dp"
+        android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
         android:text="@string/favorites"
-        android:fontFamily="@font/roboto_slab_bold"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:layout_alignParentTop="true" />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/txtTitle"
-        android:padding="8dp"
         android:background="@drawable/backgroundz"
-        android:clipToPadding="true"
+        android:backgroundTint="@color/main"
         android:clipChildren="true"
+        android:clipToPadding="true"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:scrollbars="vertical" />
 
+    <!-- Empty state TextView -->
     <TextView
         android:id="@+id/jeepCodeTXT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/rounded_colors_backgrounz"
-        android:text="@string/no_favorites_yet"
         android:padding="8dp"
+        android:text="@string/no_favorites_yet"
         android:textSize="18sp"
         tools:visibility="gone" />
 

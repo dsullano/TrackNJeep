@@ -41,6 +41,9 @@ public class HomePage extends AppCompatActivity {
 
         getSupportFragmentManager().beginTransaction().replace(R.id.container, home).commit();
 
+
+        footer.setSelectedItemId(R.id.home);
+
         footer.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem item) {

@@ -23,14 +23,15 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_favorites, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_favorite, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String jeepCode = favoriteJeepCodes.get(position);
-        holder.bind(jeepCode);
+//        holder.bind(jeepCode);
+        holder.jeepCodeTextView.setText(jeepCode);
     }
 
     @Override
@@ -44,11 +45,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            jeepCodeTextView = itemView.findViewById(R.id.jeepCodeTXT);
-        }
-
-        public void bind(String jeepCode) {
-            jeepCodeTextView.setText(jeepCode);
+            jeepCodeTextView = itemView.findViewById(R.id.jeepCodeTextView);
         }
     }
 }

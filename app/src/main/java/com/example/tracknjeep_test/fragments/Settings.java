@@ -37,36 +37,36 @@ public class Settings extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        LinearLayout llDarkMode = rootView.findViewById(R.id.llDarkMode);
-        Switch switchDarkMode = rootView.findViewById(R.id.switchDarkMode);
-        View.OnClickListener toggleSwitchListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (v.getId() == switchDarkMode.getId()) {
-                    // Set the flag to true if the switch was clicked
-                    switchClicked.set(true);
-                }
-
-                // Toggle the switch only if it's currently off
-                if (!switchDarkMode.isChecked() && !switchClicked.get()) {
-                    switchDarkMode.setChecked(true);
-                } else if (!switchClicked.get()) {
-                    switchDarkMode.setChecked(false);
-                }
-
-                // Reset the flag after processing the click event
-                switchClicked.set(false);
-            }
-        };
-
-        llDarkMode.setOnClickListener(toggleSwitchListener);
-        switchDarkMode.setOnClickListener(toggleSwitchListener);
+//        LinearLayout llDarkMode = rootView.findViewById(R.id.llDarkMode);
+//        Switch switchDarkMode = rootView.findViewById(R.id.switchDarkMode);
+//        View.OnClickListener toggleSwitchListener = new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (v.getId() == switchDarkMode.getId()) {
+//                    // Set the flag to true if the switch was clicked
+//                    switchClicked.set(true);
+//                }
+//
+//                // Toggle the switch only if it's currently off
+//                if (!switchDarkMode.isChecked() && !switchClicked.get()) {
+//                    switchDarkMode.setChecked(true);
+//                } else if (!switchClicked.get()) {
+//                    switchDarkMode.setChecked(false);
+//                }
+//
+//                // Reset the flag after processing the click event
+//                switchClicked.set(false);
+//            }
+//        };
+//
+//        llDarkMode.setOnClickListener(toggleSwitchListener);
+//        switchDarkMode.setOnClickListener(toggleSwitchListener);
 
         LinearLayout llAbout = rootView.findViewById(R.id.llAbout);
         llAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "About Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "About Clicked", Toast.LENGTH_SHORT).show();
 
                 AboutDialogFragment aboutDialogFragment = new AboutDialogFragment();
                 aboutDialogFragment.show(getChildFragmentManager(), "about_dialog");
@@ -77,7 +77,7 @@ public class Settings extends Fragment {
         llPrivacyPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Privacy Policy Clicked", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Privacy Policy Clicked", Toast.LENGTH_SHORT).show();
 
                 PrivacyPolicyDialogFragment privacyPolicyDialogFragment = new PrivacyPolicyDialogFragment();
                 privacyPolicyDialogFragment.show(getChildFragmentManager(), "privacy_policy_dialog");
